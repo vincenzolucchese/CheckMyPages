@@ -1,7 +1,9 @@
 package com.vince.demo.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,8 +11,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -20,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.vince.demo.entity.WebSite;
+import com.vince.demo.entity.BlobEntity;
+import com.vince.demo.entity.WebSiteEntity;
+import com.vince.demo.repository.BlobRepository;
 import com.vince.demo.repository.WebSiteRepository;
 
 @Service
@@ -32,16 +38,18 @@ public class CheckSiteService {
 	
 	@Autowired
 	private WebSiteRepository webSiteRepository;
+	@Autowired
+	private BlobRepository blobRepository;	
 	
 	public void checkAllSiteNow(Date timeStamp) throws IOException {
-		List<WebSite> sites = webSiteRepository.findByIsActive(true);
+		List<WebSiteEntity> sites = webSiteRepository.findByIsActive(true);
 		if(!CollectionUtils.isEmpty(sites)) {
-			for (WebSite each : sites) {
+			for (WebSiteEntity each : sites) {
 				if(each.getLastCheck()==null) {
 					String tempDir = this.createDirectoryFirsTime(each, timeStamp);
-					if(writeFile(tempDir, each, timeStamp)!=null) {
-						each.setLastCheck(timeStamp);
-						webSiteRepository.save(each);
+					File tmp = writeFile(tempDir, each, timeStamp);
+					if(tmp!=null) {
+						saveUpdate(each, tmp, timeStamp);
 					}
 				}else {
 					String directoryTemp = this.getPathRelative(PATH_WORK, each.getUrl(), timeStamp, each.getId());
@@ -62,20 +70,36 @@ public class CheckSiteService {
 					
 					if(!FileUtils.contentEqualsIgnoreEOL(maybeNew, current, "utf-8")) {
 						FileUtils.copyDirectoryToDirectory(new File(directoryTemp), new File(whereSearch));
+						saveUpdate(each, maybeNew, timeStamp);
 					}					
 				}
 			}
 		}
 	}
 	
-	private String createDirectoryFirsTime(WebSite site, Date timeStamp) throws IOException {
+	private WebSiteEntity saveUpdate(WebSiteEntity each, File tmp , Date timeStamp) throws IOException {
+		BlobEntity blob = new BlobEntity();
+		blob.setData(FileUtils.readFileToByteArray(tmp));
+		blob.setCreateDate(timeStamp);
+		blob = blobRepository.save(blob);
+		List<BlobEntity> list = each.getBlob();
+		if(CollectionUtils.isEmpty(list)) {
+			list = new ArrayList<>();
+		}
+		list.add(blob);
+		each.setLastCheck(timeStamp);
+		each.setBlob(list);
+		return webSiteRepository.save(each);
+	}
+	
+	private String createDirectoryFirsTime(WebSiteEntity site, Date timeStamp) throws IOException {
 		log.debug("create first check..." + site);
 		String directoryTemp = this.getPathRelative(PATH_SITE, site.getUrl(), timeStamp, site.getId());
 		FileUtils.forceMkdir(new File(directoryTemp));		
 		return directoryTemp;
 	}
 	
-	private File writeFile(String destDir, WebSite webSite, Date timeStamp) {
+	private File writeFile(String destDir, WebSiteEntity webSite, Date timeStamp) {
 		File fileReturn = null;
 		String inputLine;
 		try {
@@ -127,6 +151,64 @@ public class CheckSiteService {
 			directoryTemp = directoryTemp + this.getDateFormatted(timeStamp);
 		}		
 		return directoryTemp;
+	}
+	
+	private void writeDifference() throws Exception {
+	    BufferedReader br1 = null;
+	    BufferedReader br2 = null;
+	    BufferedWriter bw3 = null;
+	    String sCurrentLine;
+	    int linelength;
+
+	    HashMap<String, Integer> expectedrecords = new HashMap<String, Integer>();
+	    HashMap<String, Integer> actualrecords = new HashMap<String, Integer>();
+
+	    br1 = new BufferedReader(new FileReader("expected.txt"));
+	    br2 = new BufferedReader(new FileReader("actual.txt"));
+
+	    while ((sCurrentLine = br1.readLine()) != null) {
+	        if (expectedrecords.containsKey(sCurrentLine)) {
+	            expectedrecords.put(sCurrentLine, expectedrecords.get(sCurrentLine) + 1);
+	        } else {
+	            expectedrecords.put(sCurrentLine, 1);
+	        }
+	    }
+	    while ((sCurrentLine = br2.readLine()) != null) {
+	        if (expectedrecords.containsKey(sCurrentLine)) {
+	            int expectedCount = expectedrecords.get(sCurrentLine) - 1;
+	            if (expectedCount == 0) {
+	                expectedrecords.remove(sCurrentLine);
+	            } else {
+	                expectedrecords.put(sCurrentLine, expectedCount);
+	            }
+	        } else {
+	            if (actualrecords.containsKey(sCurrentLine)) {
+	                actualrecords.put(sCurrentLine, actualrecords.get(sCurrentLine) + 1);
+	            } else {
+	                actualrecords.put(sCurrentLine, 1);
+	            }
+	        }
+	    }
+
+	    // expected is left with all records not present in actual
+	    // actual is left with all records not present in expected
+	    bw3 = new BufferedWriter(new FileWriter(new File("c.txt")));
+	    bw3.write("Records which are not present in actual\n");
+	    for (String key : expectedrecords.keySet()) {
+	        for (int i = 0; i < expectedrecords.get(key); i++) {
+	            bw3.write(key);
+	            bw3.newLine();
+	        }
+	    }
+	    bw3.write("Records which are in actual but not present in expected\n");
+	    for (String key : actualrecords.keySet()) {
+	        for (int i = 0; i < actualrecords.get(key); i++) {
+	            bw3.write(key);
+	            bw3.newLine();
+	        }
+	    }
+	    bw3.flush();
+	    bw3.close();
 	}
 	
 }

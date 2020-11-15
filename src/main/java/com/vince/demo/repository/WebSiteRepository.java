@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.vince.demo.entity.WebSite;
+import com.vince.demo.entity.WebSiteEntity;
 
-public interface WebSiteRepository extends CrudRepository<WebSite, Long> {
+public interface WebSiteRepository extends CrudRepository<WebSiteEntity, Long> {
 
-	List<WebSite> findByName(String name);
+	List<WebSiteEntity> findByName(String name);
 	
-	List<WebSite> findByIsActive(boolean  isActive);
+	List<WebSiteEntity> findByIsActive(boolean  isActive);
 	
-	WebSite findByUrl(String url);
+	WebSiteEntity findByUrl(String url);
 
-	WebSite findById(long id);
+	WebSiteEntity findById(long id);
 }

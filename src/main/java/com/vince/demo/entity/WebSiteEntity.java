@@ -1,15 +1,18 @@
 package com.vince.demo.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class WebSite {
+public class WebSiteEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,10 +23,13 @@ public class WebSite {
 	private String url;
 	private boolean isActive;
 	private Date lastCheck;
+	
+    @OneToMany
+    private List<BlobEntity> blob = new ArrayList<>();     
 
-	protected WebSite() {}
+	protected WebSiteEntity() {}
 
-	public WebSite(String firstName, String lastName, boolean isActive) {
+	public WebSiteEntity(String firstName, String lastName, boolean isActive) {
 		this.name = firstName;
 		this.url = lastName;
 		this.isActive = isActive;
@@ -73,6 +79,14 @@ public class WebSite {
 	public String toString() {
 		return "WebSite [id=" + id + ", name=" + name + ", url=" + url + ", isActive=" + isActive + ", lastCheck="
 				+ lastCheck + "]";
+	}
+
+	public List<BlobEntity> getBlob() {
+		return blob;
+	}
+
+	public void setBlob(List<BlobEntity> blob) {
+		this.blob = blob;
 	}
 
 

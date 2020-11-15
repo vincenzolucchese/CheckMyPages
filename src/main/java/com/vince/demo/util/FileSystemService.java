@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vince.demo.entity.WebSite;
+import com.vince.demo.entity.WebSiteEntity;
 import com.vince.demo.repository.WebSiteRepository;
 
 @Service
@@ -35,7 +35,7 @@ public class FileSystemService {
 	private WebSiteRepository webSiteRepository;
 
 	public void fillDbByJson(Date timeStamp) {
-		List<WebSite> arraySite = new ArrayList<>();
+		List<WebSiteEntity> arraySite = new ArrayList<>();
 		JSONParser parser = new JSONParser();
 		try {
 			File site = new File(PATH_SITE+FILE_SITE);
@@ -51,11 +51,11 @@ public class FileSystemService {
 					String name = (String) each.get("name");
 					String url = (String) each.get("uri");
 					if (webSiteRepository.findByUrl(url) == null) {
-						WebSite siteEntity = new WebSite(name, url, true);
+						WebSiteEntity siteEntity = new WebSiteEntity(name, url, true);
 						arraySite.add(siteEntity);
 					}
 				}
-				List<WebSite> newSite = (List<WebSite>) webSiteRepository.saveAll(arraySite);
+				List<WebSiteEntity> newSite = (List<WebSiteEntity>) webSiteRepository.saveAll(arraySite);
 				log.debug("SIZE: " + newSite.size());
 				
 				DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");  

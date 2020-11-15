@@ -33,8 +33,8 @@ public class CheckMyPagesApplication {
 	public CommandLineRunner demo(WebSiteRepository repository) {
 		return (args) -> {
 			Date timeStamp = new Date();
-			fileSystemService.fillDbByJson(timeStamp);	
-			checkSiteService.checkAllSiteNow(timeStamp);
+//			fileSystemService.fillDbByJson(timeStamp);	
+//			checkSiteService.checkAllSiteNow(timeStamp);
 		};
 	}
 	

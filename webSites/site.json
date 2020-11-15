@@ -1,0 +1,139 @@
+{
+	"client": {
+		"local": 1
+	},
+	"data": [
+			{
+			"name": "dad del mare. Assunzioni per 92 unità di personale a tempo indeterminato | Concorsi e riqualificazione PA",
+			"uri": "http://localhost:8080/",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:52:04.148Z",
+			"_id": 2
+		},
+		{
+			"name": "Concorso RIPAM per Agenzia italiana per la cooperazione allo sviluppo e Ministero dell’ambiente e della tutela del territorio e del mare. Assunzioni per 92 unità di personale a tempo indeterminato | Concorsi e riqualificazione PA",
+			"uri": "http://riqualificazione.formez.it/content/concorso-ripam-agenzia-italiana-cooperazione-sviluppo-e-ministero-dellambiente-e-tutela",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:52:04.148Z",
+			"_id": 2
+		},
+		{
+			"name": "Concorso Ripam per il Ministero dello sviluppo economico e la Presidenza del Consiglio dei Ministri. Selezione per 70 unità di personale | Concorsi e riqualificazione PA",
+			"uri": "http://riqualificazione.formez.it/content/concorso-ripam-ministero-sviluppo-economico-e-presidenza-consiglio-ministri-selezione-70",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:55:52.141Z",
+			"_id": 3
+		},
+		{
+			"name": "Portale Trasparenza ACI - Concorso pubblico per n. 8 posti area C, livello economico C1, profilo specialistico informatico",
+			"uri": "http://www.aci.it/laci/la-federazione/amministrazione-trasparente/archivio22_bandi-di-concorso_0_108_806_1.html",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:56:47.279Z",
+			"_id": 4
+		},
+		{
+			"name": "CONCORSICAMERA - Pubblico concorso, per esami, a 8 posti di Consigliere parlamentare della professionalità tecnica con specializzazione informatica (codice C02)",
+			"uri": "https://concorsi.camera.it/camera/consgen-02/",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": null,
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:57:24.620Z",
+			"_id": 5
+		},
+		{
+			"name": "Banca d'Italia - Concorso pubblico per 105 assunzioni nell'Area operativa - Bando del 19 febbraio 2020",
+			"uri": "https://www.bancaditalia.it/chi-siamo/lavorare-bi/informazioni-concorsi/2020/bando-20200219/index.html",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:58:06.007Z",
+			"_id": 6
+		},
+		{
+			"name": "Ripam - Concorso Unico funzionari amministrativi. Reclutamento di n. 2.133 unità di personale a tempo indeterminato | Concorsi e riqualificazione PA",
+			"uri": "http://riqualificazione.formez.it/content/ripam-concorso-unico-funzionari-amministrativi-reclutamento-n-2133-unita-personale-tempo",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T14:59:33.617Z",
+			"_id": 7
+		},
+		{
+			"name": "Concorso pubblico, per esami, per l'assunzione a tempo pieno e indeterminato di n. 6 unità di personale non dirigenziale con il profilo di Funzionario informatico (esperto in materie sanitarie) - CODICE CONCORSO 790",
+			"uri": "http://www.salute.gov.it/portale/documentazione/p6_2_7_1.jsp?lingua=italiano&id=201",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-09-24T15:00:00.941Z",
+			"_id": 8
+		},
+		{
+			"name": "Concorsi e riqualificazione PA",
+			"uri": "http://riqualificazione.formez.it/",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 45,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":465096}}",
+			"ts": "2020-09-24T15:04:05.325Z",
+			"_id": 9
+		},
+		{
+			"name": "agea.gov.it",
+			"uri": "https://www.agea.gov.it/portal/page/portal/AGEAPageGroup/HomeAGEA/AreaCons/Amministrazione%20Trasparente/Bandi%20di%20concorso/Bandi%20di%20concorso",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": [],
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-10-27T09:06:47.984Z",
+			"_id": 10
+		},
+		{
+			"name": "Concorsi - Agenzia per le Erogazioni in Agricoltura",
+			"uri": "https://agea.selezionieconcorsi.it/index.php",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": null,
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-10-27T14:37:35.455Z",
+			"_id": 11
+		},
+		{
+			"name": "Concorso INPS per 165 informatici: online il bando",
+			"uri": "https://www.inps.it/nuovoportaleinps/default.aspx?itemdir=54263#",
+			"config": "{\"includeStyle\":true,\"selections\":[{\"frames\":[{\"index\":0,\"excludes\":[],\"includes\":[{\"expr\":\"/html\",\"type\":\"xpath\"}]}],\"dynamic\":true,\"delay\":0}],\"ignoreEmptyText\":true,\"dataAttr\":\"text\"}",
+			"tags": null,
+			"content_type": 2,
+			"state": 40,
+			"schedule": "{\"type\":\"INTERVAL\",\"params\":{\"interval\":103777}}",
+			"ts": "2020-11-02T14:40:40.637Z",
+			"_id": 12
+		}
+	]
+}

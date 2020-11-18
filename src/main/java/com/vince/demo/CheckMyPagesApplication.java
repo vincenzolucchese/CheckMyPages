@@ -2,13 +2,18 @@ package com.vince.demo;
 
 import java.util.Date;
 
+import javax.validation.Validator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.vince.demo.repository.WebSiteRepository;
 import com.vince.demo.util.CheckSiteService;
@@ -33,10 +38,25 @@ public class CheckMyPagesApplication {
 	public CommandLineRunner demo(WebSiteRepository repository) {
 		return (args) -> {
 			Date timeStamp = new Date();
-//			fileSystemService.fillDbByJson(timeStamp);	
-//			checkSiteService.checkAllSiteNow(timeStamp);
+			fileSystemService.fillDbByJson(timeStamp);	
+			checkSiteService.checkAllSiteNow(timeStamp);
 		};
 	}
+	
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("messages/messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
+	}
+	
+	@Bean
+    public Validator validator(MessageSource messageSource) {
+        LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+        factory.setValidationMessageSource(messageSource);
+        return factory;
+    }
 	
 
 }

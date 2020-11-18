@@ -1,5 +1,6 @@
 package com.vince.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class PageCheckController {
     public String hello(Model model,
                         @RequestParam(value="name", required=false, defaultValue="World") String name) {
     	List<WebSiteEntity> list = (List<WebSiteEntity>) webSiteRepository.findAll();
-        model.addAttribute("list", list);        
+        model.addAttribute("listBeanTable", list);   
+        model.addAttribute("categoryList", new ArrayList<>());   
+
         return PAGE_RETURN;
     }
     

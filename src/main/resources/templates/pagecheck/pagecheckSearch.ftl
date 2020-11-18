@@ -35,34 +35,84 @@
         </div>
       </div>
       <div class="row">
-        <ul class="portfolio-area da-thumbs">
-        
-        <#list demoAppList as demoApp>        
-          <li class="portfolio-item" data-id="id-0" data-type=${demoApp.codeCategory.code}>
-            <div class="span3">
-              <div class="thumbnail">
-                <div class="image-wrapp">
-                  <img src="<@spring.url '/img/portfolio/img-1.jpg'/>" alt=${demoApp.name} title=${demoApp.name} />
-                  <article class="da-animate da-slideFromRight">
-                    <a class="zoom" data-pretty="prettyPhoto" href="<@spring.url '/img/portfolio/big-1.jpg'/>">
-							<i class="icon-bg-light icon-zoom-in icon-circled icon-2x"></i>
-							</a>
-                    <a href="<@spring.url '/portfolio/detail?code=${demoApp.code}'/>">
-							<i class="icon-bg-light icon-link icon-circled icon-2x"></i>
-							</a>
-                  </article>
-                </div>
-                <div class="desc">
-                  <h5><i class="icon-file"></i> <strong>${demoApp.name}</strong></h5>
-                  <p>${demoApp.briefDescription}</p>
-                </div>
-              </div>
-            </div>
-          </li>                        
-		</#list> 
-		
+        <ul class="portfolio-area da-thumbs">	
         </ul>
       </div>
+      
+      <#--  <@spring.bind "searchForm" />  -->
+
+      <h1>Search User</h1>
+          
+      	<#if allErrors??>
+            <div class="alert alert-danger">
+                Check all errors showed.
+            </div>
+    	</#if>  
+    	<#if msgOK??>
+            <div class="alert alert-success">
+               Operation success.
+            </div>
+    	</#if>  	
+		
+		<form action="<@spring.url '/Manage_Users/Search' />" method="POST">
+      	<div class="row"> 
+      	 <div class="col-xl-9">       
+			<label class="control-label"><@spring.message 'label.user.simplefilter' /></label>
+			<div class="input-group">
+			 <#-- 
+			 <@spring.formInput "searchForm.filterSimpleSearch" 'class="form-control"' />
+             <@spring.showErrors "</br>", "form-control alert-danger" />
+             -->
+			    <span class="input-group-btn">
+			        <button class="btn btn-info" name="submit" type="submit" value="Search">Search</button>
+			    </span>
+			</div>            
+         </div>
+     	</div>
+     	</br>
+		
+		<div class="row"> 
+	      	<div class="col-xl-12">  
+		    <h2 class="sub-header">Table Users</h2>
+		    <#if listBeanTable?? && listBeanTable?has_content  > 
+			      <div class="table-responsive">
+		            <table class="table table-striped">
+		              <thead>
+		                <tr>
+		                  <th>Username</th>
+		                  <th>Firstname</th>
+		                  <th>LastName</th>
+		                  <th>Role</th>
+		                  <th>Actions</th>
+		                </tr>
+		              </thead>
+		              <tbody>
+		              	<#list listBeanTable as child>
+						    <tr>
+						      <td>${child.id}</td>
+			                  <td>${child.name}</td>
+			                  <td>${child.url}</td>
+			                  <td>${child.lastCheck}</td>
+			                  <td>
+			                  	<a class="fa fa-info-circle" href="<@spring.url '/Manage_Users/InsertUpdateViewDelete/'/>${child.id?string.computer}/R" title="Read"></a>
+			                    <a class="fa fa-pencil-square" href="<@spring.url '/Manage_Users/InsertUpdateViewDelete/'/>${child.id?string.computer}/U" title="Update"></a>
+			                    <a class="fa fa-trash" href="<@spring.url '/Manage_Users/InsertUpdateViewDelete/'/>${child.id?string.computer}/D" title="Delete"></a>		                  
+			                  </td>
+						    </tr>
+					    </#list>
+		              </tbody>
+		            </table>
+					<#-- pagination 
+					<@pagination.standardPagination urlAction="/Manage_Users/Search" />
+					-->	
+						           	           
+		          </div>
+			<#else> 
+			    No Details Available
+			</#if>	
+			</div>
+		</div>	
+		</form>
 
     </div>
   </section>

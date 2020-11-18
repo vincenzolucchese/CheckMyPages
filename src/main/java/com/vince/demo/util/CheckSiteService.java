@@ -35,7 +35,9 @@ public class CheckSiteService {
 	private static final Logger log = LoggerFactory.getLogger(CheckSiteService.class);
 	private static final String PATH_SITE = "./history_page/";
 	private static final String PATH_WORK = "./working/";
-	
+	private static final String DIV_RED = "div {border: 3px solid red; margin-left: 100px; }";
+	private static final String DIV_GREEN = "div {border: 3px solid green; margin-left: 100px; }";
+
 	@Autowired
 	private WebSiteRepository webSiteRepository;
 	@Autowired

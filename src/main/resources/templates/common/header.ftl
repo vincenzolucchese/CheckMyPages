@@ -28,7 +28,7 @@
                       <li class="dropdown">
                         <a href="#">Features</a>
                         <ul class="dropdown-menu">
-                          <li><a href="scaffolding.html">Scaffolding</a></li>
+                          <li><a href="<@spring.url '/pagecheck/search'/>">Pages Checked</a></li>
                           <li><a href="base-css.html">Base CSS</a></li>
                           <li><a href="components.html">Components</a></li>
                           <li><a href="icons.html">Icons</a></li>

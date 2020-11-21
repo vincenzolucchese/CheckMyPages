@@ -9,7 +9,7 @@
         <div class="span6">
           <h2><strong>Bootstrap <span class="highlight primary">business theme</span></strong></h2>
           <p class="lead">
-            Lorem ipsum dolor sit amet, qui corpora oportere cu. Usu et iudico maluisset, pro ut lobortis vituperatoribus, percipit aliquando efficiendi est ex.
+            Lorem sit amet, qui corpora oportere cu. Usu et iudico maluisset, pro ut lobortis vituperatoribus, percipit aliquando efficiendi est ex.
           </p>
           <ul class="list list-ok strong bigger">
             <li>100% Compatible with twitter bootstrap</li>

@@ -25,8 +25,8 @@ public class WebSiteEntity {
 	private Date lastCheck;
 	
     @OneToMany
-    private List<BlobEntity> blob = new ArrayList<>();     
-
+    private List<AttachForPageEntity> attachment = new ArrayList<>();  
+	
 	protected WebSiteEntity() {}
 
 	public WebSiteEntity(String firstName, String lastName, boolean isActive) {
@@ -81,12 +81,12 @@ public class WebSiteEntity {
 				+ lastCheck + "]";
 	}
 
-	public List<BlobEntity> getBlob() {
-		return blob;
+	public List<AttachForPageEntity> getAttachment() {
+		return attachment;
 	}
 
-	public void setBlob(List<BlobEntity> blob) {
-		this.blob = blob;
+	public void setAttachment(List<AttachForPageEntity> attachment) {
+		this.attachment = attachment;
 	}
 
 

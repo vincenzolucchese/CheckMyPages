@@ -26,6 +26,8 @@ public class WebSiteEntity {
 	
     @OneToMany
     private List<AttachForPageEntity> attachment = new ArrayList<>();  
+    @OneToMany
+    private List<UserEntity> user = new ArrayList<>();  
 	
 	protected WebSiteEntity() {}
 
@@ -87,6 +89,14 @@ public class WebSiteEntity {
 
 	public void setAttachment(List<AttachForPageEntity> attachment) {
 		this.attachment = attachment;
+	}
+
+	public List<UserEntity> getUser() {
+		return user;
+	}
+
+	public void setUser(List<UserEntity> user) {
+		this.user = user;
 	}
 
 

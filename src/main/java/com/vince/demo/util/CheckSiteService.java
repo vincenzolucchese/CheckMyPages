@@ -123,7 +123,7 @@ public class CheckSiteService {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(fromEmail, pwdEmail);
 				}
-			}
+			};
 		}
 	}
 	

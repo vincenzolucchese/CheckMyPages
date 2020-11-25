@@ -17,18 +17,33 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.CharSetUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.vince.demo.entity.AttachForPageEntity;
 import com.vince.demo.entity.BlobEntity;
+import com.vince.demo.entity.UserEntity;
 import com.vince.demo.entity.WebSiteEntity;
 import com.vince.demo.repository.AttachForPageRepository;
 import com.vince.demo.repository.BlobRepository;
@@ -42,6 +57,20 @@ public class CheckSiteService {
 	private static final String PATH_WORKING = "./working/";
 	private static final String DIV_RED = "<div style=\"border: 3px solid red; margin : 1em; padding: 1em;\">";
 	private static final String DIV_GREEN = "<div style=\"border: 3px solid green; margin : 1em; padding: 1em;\">";
+	
+	@Value( "${	key.mail.pwd.sender}" )
+	private String pwdEmail;
+	@Value( "${key.mail.from.address}" )
+	private String fromEmail;
+	@Value( "${key.mail.host}" )
+	private String hostEmail;
+	@Value( "${key.mail.host.port}" )
+	private String portEmail;	
+	@Value( "${key.mail.host.ssl}" )
+	private String sslEmail;
+	@Value( "${key.mail.host.auth}" )
+	private String authEmail;
+
 
 	@Autowired
 	private WebSiteRepository webSiteRepository;
@@ -79,6 +108,7 @@ public class CheckSiteService {
 					
 					if(!FileUtils.contentEqualsIgnoreEOL(maybeNew, current, "utf-8")) {
 						File delta = writeDifference(current, maybeNew, new File(directoryTemp), timeStamp);
+						sendEmail(each, maybeNew, delta, timeStamp);
 						saveUpdate(each, maybeNew, delta, timeStamp);
 						FileUtils.copyDirectoryToDirectory(new File(directoryTemp), new File(whereSearch));
 					}					
@@ -87,6 +117,57 @@ public class CheckSiteService {
 		}
 	} 
 	
+	class CustomAuthenticator extends Authenticator{
+		public CustomAuthenticator() {
+			new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(fromEmail, pwdEmail);
+				}
+			}
+		}
+	}
+	
+	private void sendEmail(WebSiteEntity each, File maybeNew, File delta, Date timeStamp) {
+		for (UserEntity user : each.getUser()) {
+			String to = user.getEmail();
+			String from = this.fromEmail;
+			String host = this.hostEmail;
+			Properties properties = System.getProperties();
+			properties.put("mail.smtp.host", host);
+			properties.put("mail.smtp.port", this.portEmail);
+			properties.put("mail.smtp.ssl.enable", this.sslEmail.toString());
+			properties.put("mail.smtp.auth", this.authEmail.toString());
+			// Get the Session object.// and pass
+			Session session = Session.getInstance(properties, new CustomAuthenticator());
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(from));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+				// Set Subject: header field
+				message.setSubject("This is the Subject Line!");
+				Multipart multipart = new MimeMultipart();
+				MimeBodyPart attachmentPart = new MimeBodyPart();
+				MimeBodyPart textPart = new MimeBodyPart();
+				try {
+					attachmentPart.attachFile(delta);
+					textPart.setText("This is text");
+					multipart.addBodyPart(textPart);
+					multipart.addBodyPart(attachmentPart);
+				} catch (IOException e) {
+					log.error(e.getMessage());
+				}
+				message.setContent(multipart);
+				log.debug("sending...");
+				// Send message
+				Transport.send(message);
+				log.debug("Sent message successfully....");
+			} catch (MessagingException mex) {
+				log.error(mex.getMessage());
+			}
+		}
+	
+	}
+
 	private WebSiteEntity saveUpdate(WebSiteEntity each, File tmp, File delta, Date timeStamp) throws IOException {
 		BlobEntity blob = new BlobEntity();
 		blob.setData(FileUtils.readFileToByteArray(tmp));
